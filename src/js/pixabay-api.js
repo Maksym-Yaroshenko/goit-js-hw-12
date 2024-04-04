@@ -1,4 +1,4 @@
-export default function getPixabay(userQuery) {
+export default async function getPixabay(userQuery) {
   const BASE_URL = 'https://pixabay.com/api/';
   const params = new URLSearchParams({
     key: '43152817-de47b6f1b37f4fad093212301',
@@ -10,5 +10,6 @@ export default function getPixabay(userQuery) {
 
   const url = `${BASE_URL}?${params}`;
 
-  return fetch(url).then(res => res.json());
+  const res = await fetch(url);
+  return res.json();
 }
