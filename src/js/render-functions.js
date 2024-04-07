@@ -1,15 +1,18 @@
-export default function renderInput(
-  webformatURL,
-  largeImageURL,
-  tags,
-  likes,
-  views,
-  comments,
-  downloads
-) {
-  return `    
+export default function renderInput(posts) {
+  return posts
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `    
     <li class="retrieved-search-element">
-      <a href="${largeImageURL}"><img class="img-element" src="${webformatURL}" alt="${tags}"></a>
+      <a href="${largeImageURL}"><img class="img-element" src="${webformatURL}" alt="${tags}" loading="lazy"></a>
       <ul class="menu">
         <li class="menu-item">
           <h4 class="menu-item-text-bold">Likes</h4>
@@ -29,4 +32,7 @@ export default function renderInput(
         </li>
       </ul>
     </li>`;
+      }
+    )
+    .join('');
 }

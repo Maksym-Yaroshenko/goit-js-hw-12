@@ -1,15 +1,18 @@
-export default async function getPixabay(userQuery) {
-  const BASE_URL = 'https://pixabay.com/api/';
-  const params = new URLSearchParams({
+import axios from 'axios';
+
+export default async function getPixabay(userQuery, currentPage) {
+  const url = 'https://pixabay.com/api/';
+
+  const params = {
     key: '43152817-de47b6f1b37f4fad093212301',
     q: userQuery,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: 'true',
-  });
+    page: currentPage,
+    per_page: 15,
+  };
 
-  const url = `${BASE_URL}?${params}`;
-
-  const res = await fetch(url);
-  return res.json();
+  const res = await axios.get(url, { params });
+  return res.data;
 }
